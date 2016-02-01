@@ -1,0 +1,6 @@
+{
+	"name": "marvin255/bitrix-base",
+    "autoload": {
+        "psr-4": { "app\\": "lib/" }
+    }
+}
