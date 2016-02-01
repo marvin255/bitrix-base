@@ -7,7 +7,9 @@
     "autoload": {
         "psr-4": { "app\\": "lib/" }
     },
-    "post-create-project-cmd": [
-        "app\\composer\\Installer::postCreateProject"
-    ]
+    "scripts": {
+        "post-create-project-cmd": [
+            "app\\composer\\Installer::postCreateProject"
+        ]
+    }
 }
