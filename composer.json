@@ -1,5 +1,8 @@
 {
 	"name": "marvin255/bitrix-base",
+	"require": {
+		"symfony/console": "dev-master"
+	},
     "autoload": {
         "psr-4": { "app\\": "lib/" }
     }

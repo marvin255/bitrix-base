@@ -22,8 +22,8 @@ define("CACHED_b_agent", 3660);
 define("CACHED_menu", 3600);
 
 define("BX_UTF", true);
-define("BX_FILE_PERMISSIONS", 0664);
-define("BX_DIR_PERMISSIONS", 0775);
+define("BX_FILE_PERMISSIONS", 0644);
+define("BX_DIR_PERMISSIONS", 0755);
 @umask(~BX_DIR_PERMISSIONS);
 define("BX_DISABLE_INDEX_PAGE", true);
 ?>
