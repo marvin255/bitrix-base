@@ -1,5 +1,6 @@
 {
     "name": "marvin255/bitrix-base",
+    "type": "project",
     "require": {
         "symfony/console": "dev-master"
     },
