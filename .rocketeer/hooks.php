@@ -5,7 +5,7 @@ $cleanRockteerData = function ($task) {
     $task->runForCurrentRelease('rm -Rf rockteer.phar');
 };
 
-$cleanCache = function($task) {
+$cleanCache = function ($task) {
     $task->command->info('Clean cache');
     $task->runForCurrentRelease('rm -Rf web/bitrix/cache/*');
     $task->runForCurrentRelease('rm -Rf web/bitrix/managed_cache/*');
