@@ -1,5 +1,16 @@
 <?php
 
+$cleanRockteerData = function ($task) {
+    $task->runForCurrentRelease('rm -Rf .rocketeer');
+    $task->runForCurrentRelease('rm -Rf rockteer.phar');
+};
+
+$cleanCache = function($task) {
+    $task->command->info('Clean cache');
+    $task->runForCurrentRelease('rm -Rf web/bitrix/cache/*');
+    $task->runForCurrentRelease('rm -Rf web/bitrix/managed_cache/*');
+};
+
 return [
 
     // Tasks
@@ -24,14 +35,13 @@ return [
     // Tasks to execute after the core Rocketeer Tasks
     'after'  => [
         'setup'   => [],
-        'deploy'  => [],
+        'deploy'  => [
+            $cleanRockteerData,
+        ],
         'cleanup' => [],
         'update'  => [
-            function($task) {
-                $task->command->info('Clean cache');
-                $task->runForCurrentRelease('rm -Rf web/bitrix/cache/*');
-                $task->runForCurrentRelease('rm -Rf web/bitrix/managed_cache/*');
-            },
+            $cleanRockteerData,
+            $cleanCache,
         ],
     ],
 
