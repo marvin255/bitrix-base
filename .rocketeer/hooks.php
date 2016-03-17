@@ -1,6 +1,7 @@
 <?php
 
 $cleanRockteerData = function ($task) {
+    $task->command->info('Remove rocketeer info files');
     $task->runForCurrentRelease('rm -Rf .rocketeer');
     $task->runForCurrentRelease('rm -Rf rockteer.phar');
 };
@@ -9,6 +10,11 @@ $cleanCache = function ($task) {
     $task->command->info('Clean cache');
     $task->runForCurrentRelease('rm -Rf web/bitrix/cache/*');
     $task->runForCurrentRelease('rm -Rf web/bitrix/managed_cache/*');
+};
+
+$setComposerAsExecutable = function ($task) {
+    $task->command->info('Make composer.phar executable');
+    $task->runForCurrentRelease('chmod 0770 composer.phar');
 };
 
 return [
@@ -30,6 +36,9 @@ return [
         'setup'   => [],
         'deploy'  => [],
         'cleanup' => [],
+        'dependencies' => [
+            $setComposerAsExecutable,
+        ],
     ],
 
     // Tasks to execute after the core Rocketeer Tasks
