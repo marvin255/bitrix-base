@@ -13,7 +13,7 @@ return [
     ],
 
     // The number of releases to keep at all times
-    'keep_releases'  => 4,
+    'keep_releases'  => 1,
 
     // Folders
     ////////////////////////////////////////////////////////////////////
@@ -59,6 +59,7 @@ return [
 
     'permissions'    => [
 
+        /*
         // The folders and files to set as web writable
         'files'    => [
             'web',
@@ -72,6 +73,7 @@ return [
                 sprintf('chmod -Rf 755 %s', $file),
             ];
         },
+        */
 
     ],
 
