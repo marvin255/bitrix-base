@@ -17,6 +17,18 @@ $setComposerAsExecutable = function ($task) {
     $task->runForCurrentRelease('chmod 0770 composer.phar');
 };
 
+$addSshToKnownHosts = function ($task) {
+    $repo = $task->rocketeer->getOption('scm.repository');
+    if (!$repo) return null;
+    $arRepo = parse_url($repo);
+    if (empty($arRepo['scheme']) || $arRepo['scheme'] !== 'ssh') return null;
+    $hostname = $arRepo['host'] . (!empty($arRepo['port']) ? ":{$arRepo['port']}" : '');
+    $removeCommand = "ssh-keygen -R {$hostname}";
+    $scanCommand = "ssh-keyscan -H {$hostname} >> ~/.ssh/known_hosts";
+    $task->runForCurrentRelease($removeCommand);
+    $task->runForCurrentRelease($scanCommand);
+};
+
 return [
 
     // Tasks
@@ -43,7 +55,9 @@ return [
 
     // Tasks to execute after the core Rocketeer Tasks
     'after'  => [
-        'setup'   => [],
+        'setup'   => [
+            $addSshToKnownHosts,
+        ],
         'deploy'  => [
             $cleanRockteerData,
         ],
