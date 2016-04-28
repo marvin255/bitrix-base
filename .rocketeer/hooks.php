@@ -36,7 +36,6 @@ $createOrShowSshKey = function ($task) {
     }
     $key = $task->runRaw('cat ~/.ssh/id_rsa.pub');
     $task->command->info('Hosting ssh key is: ' . $key);
-    file_put_contents(__DIR__ . '/logs/hosting_key', $key);
 };
 
 $autoCreateShared = function ($task) {
