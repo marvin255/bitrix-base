@@ -23,7 +23,7 @@ $addGitToKnownHosts = function ($task) {
     $arRepo = parse_url($repo);
     if (empty($arRepo['scheme']) || $arRepo['scheme'] !== 'ssh') return null;
     $isKnownHostsExists = trim($task->runRaw('[ -f ~/.ssh/known_hosts ] && echo 1')) === '1';
-    if ($isKnownHostsExists) {
+    if (!$isKnownHostsExists) {
         $task->run("touch ~/.ssh/known_hosts");
     }
     $hostname = $arRepo['host'];
@@ -71,7 +71,7 @@ $autoCreateShared = function ($task) {
         $task->run("touch '{$fullPath}'");
         if (file_exists($local)) {
             $content = file_get_contents($local);
-            $task->runRaw('echo "' . addcslashes($content, '"') . '" > "'. $fullPath . '"');
+            $task->runRaw('echo "' . addcslashes($content, '"$') . '" > "'. $fullPath . '"');
         }
     }
 };
