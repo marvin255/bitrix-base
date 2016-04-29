@@ -22,6 +22,10 @@ $addGitToKnownHosts = function ($task) {
     if (!$repo) return null;
     $arRepo = parse_url($repo);
     if (empty($arRepo['scheme']) || $arRepo['scheme'] !== 'ssh') return null;
+    $isKnownHostsExists = trim($task->runRaw('[ -f ~/.ssh/known_hosts ] && echo 1')) === '1';
+    if ($isKnownHostsExists) {
+        $task->run("touch ~/.ssh/known_hosts");
+    }
     $hostname = $arRepo['host'];
     $task->runForCurrentRelease([
         "ssh-keygen -R {$hostname}",
