@@ -15,6 +15,7 @@ frontend/build
 .DS_Store
 site_checker_*.*
 .idea/
+*.sublime-workspace
 
 
 /vendor
