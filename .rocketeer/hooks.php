@@ -1,9 +1,5 @@
 <?php
 
-//регистрируем события. специфичные для Creative
-require_once __DIR__ . '/../vendor/autoload.php';
-\bxrocketeer\Registrator::events();
-
 return [
     // Tasks
     //

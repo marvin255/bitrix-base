@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 use Rocketeer\Services\Connections\ConnectionsHandler;
 
 return [
@@ -13,7 +15,8 @@ return [
     ////////////////////////////////////////////////////////////////////
 
     // The plugins to load
-    'plugins'          => [// 'Rocketeer\Plugins\Slack\RocketeerSlack',
+    'plugins'          => [
+        '\bxrocketeer\Registrator',
     ],
 
     // Logging
