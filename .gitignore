@@ -18,7 +18,6 @@ site_checker_*.*
 
 
 /vendor
-composer.lock
 
 
 .rocketeer/logs
