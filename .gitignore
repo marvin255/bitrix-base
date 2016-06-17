@@ -8,7 +8,9 @@ web/bitrix/upload/
 web/upload/
 web/sitemap*
 
+
 frontend/node_modules
+frontend/bower_components
 frontend/build
 
 
