@@ -10,7 +10,8 @@
     },
     "scripts": {
       "post-create-project-cmd": [
-        "app\\composer\\Installer::postCreateProject"
+        "app\\composer\\Installer::postCreateProject",
+        "app\\composer\\Installer::configureProject"
       ]
     },
     "repositories": [
