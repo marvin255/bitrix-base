@@ -46,9 +46,6 @@ class Installer
 	public static function configureProject($event)
 	{
 		$io = $event->getIO();
-
-		$is_config = trim($io->ask("Введите '1', чтобы настроить проект:\r\n"));
-		if ($is_config === '') return null;
 		
 		//получаем данные о хосте для тестовой площадки
 		$host = null;
