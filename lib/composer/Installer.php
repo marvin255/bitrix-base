@@ -46,7 +46,7 @@ class Installer
 	public static function configureProject($event)
 	{
 		$io = $event->getIO();
-		
+
 		//получаем данные о хосте для тестовой площадки
 		$host = null;
 		$error = null;
@@ -153,17 +153,17 @@ class Installer
 		$config = file_get_contents($configFile);
 		$config = preg_replace(
 			'/(\'host\'\s*=>\s*\')[^\']*(\',)/',
-			'$1' . addslashes($host) . '$2',
+			'${1}' . addslashes($host) . '${2}',
 			$config
 		);
 		$config = preg_replace(
 			'/(\'username\'\s*=>\s*\')[^\']*(\',)/',
-			'$1' . addslashes($username) . '$2',
+			'${1}' . addslashes($username) . '${2}',
 			$config
 		);
 		$config = preg_replace(
 			'/(\'password\'\s*=>\s*\')[^\']*(\',)/',
-			'$1' . addslashes($password) . '$2',
+			'${1}' . addslashes($password) . '${2}',
 			$config
 		);
 		file_put_contents($configFile, $config);
@@ -174,7 +174,7 @@ class Installer
 		$config = file_get_contents($scmFile);
 		$config = preg_replace(
 			'/(\'repository\'\s*=>\s*\')[^\']*(\',)/',
-			'$1' . addslashes($git) . '$2',
+			'${1}' . addslashes($git) . '${2}',
 			$config
 		);
 		file_put_contents($scmFile, $config);
