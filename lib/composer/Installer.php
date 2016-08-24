@@ -48,119 +48,65 @@ class Installer
 		$io = $event->getIO();
 
 		//получаем данные о хосте для тестовой площадки
-		$host = null;
-		$error = null;
-		while (true) {
-			if ($host !== null) {
-				if (empty($host)) {
-					$error = 'Хост не указан';
-				} elseif (
-					!preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,03}(\:\d+)?$/', $host)
-					&& !preg_match('/^[0-9a-z\-\.]+\.[a-z]+(\:\d+)?$/i', $host)
-				){
-					$error = 'Хост указан в неверном формате';
-				} elseif (
-					!preg_match('/^.+\:\d+$/', $host)
-				){
-					$error = 'Не указан порт';
-				} else {
-					break;
-				}
-			}
-			if (!empty($error)) {
-				$hostNew = trim($io->ask("{$error} (введите заново или оставьте пустую строку, чтобы сохранить вариант '{$host}'):\r\n"));
-				if ($hostNew !== '') $host = $hostNew;
-				else break;
-			} else {
-				$host = trim($io->ask("Введите хост для тестовой площадки:\r\n"));
-			}
-		}
+		$host = self::askValid(
+			'Введите хост для тестовой площадки',
+			[
+				['preg' => true, 'message' => 'Хост не указан'],
+				[
+					'preg' => '/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|([0-9a-z\-\.]+\.[a-z]+)(\:\d+)?$/',
+					'message' => 'Хост указан в неверном формате'
+				],
+				['preg' => '/^.+\:\d+$/', 'message' => 'Не указан порт'],
+			],
+			$io
+		);
 
 		//получаем данные об имени пользователя для тестовой площадки
-		$username = null;
-		$error = null;
-		while (true) {
-			if ($username !== null) {
-				if (empty($username)) {
-					$error = 'Имя пользователя не указано';
-				} else {
-					break;
-				}
-			}
-			if (!empty($error)) {
-				$usernameNew = trim($io->ask("{$error} (введите заново или оставьте пустую строку, чтобы сохранить вариант '{$username}'):\r\n"));
-				if ($usernameNew !== '') $username = $usernameNew;
-				else break;
-			} else {
-				$username = trim($io->ask("Введите имя пользователя для тестовой площадки:\r\n"));
-			}
-		}
+		$username = self::askValid(
+			'Введите имя пользователя для тестовой площадки',
+			[
+				['preg' => true, 'message' => 'Имя пользователя не указано'],
+			],
+			$io
+		);
 
 		//получаем данные о пароле для пользователя для тестовой площадки
-		$password = null;
-		$error = null;
-		while (true) {
-			if ($password !== null) {
-				if (empty($password)) {
-					$error = 'Пароль не указан';
-				} else {
-					break;
-				}
-			}
-			if (!empty($error)) {
-				$passwordNew = trim($io->ask("{$error} (введите заново или оставьте пустую строку, чтобы сохранить вариант '{$password}'):\r\n"));
-				if ($passwordNew !== '') $password = $passwordNew;
-				else break;
-			} else {
-				$password = trim($io->ask("Введите пароль для тестовой площадки:\r\n"));
-			}
-		}
+		$password = self::askValid(
+			'Введите пароль для тестовой площадки',
+			[
+				['preg' => true, 'message' => 'Пароль не указан'],
+			],
+			$io
+		);
 
 		//получаем ссылку на репозиторий
-		$git = null;
-		$error = null;
-		while (true) {
-			if ($git !== null) {
-				if (empty($git)) {
-					$error = 'Ссылка на репозиторий не указана';
-				} elseif (
-					!preg_match('/^ssh\:\/\/.+$/', $git)
-				){
-					$error = 'Не указан ssh протокол';
-				} elseif (
-					!preg_match('/^ssh\:\/\/[^\/]+\:\d+\/.+$/', $git)
-				){
-					$error = 'Не указан порт';
-				} elseif (
-					!preg_match('/^ssh\:\/\/[^@\/]+@[^@\/]+\:\d+\/.+$/', $git)
-				){
-					$error = 'Не указан пользователь';
-				} else {
-					break;
-				}
-			}
-			if (!empty($error)) {
-				$gitNew = trim($io->ask("{$error} (введите заново или оставьте пустую строку, чтобы сохранить вариант '{$git}'):\r\n"));
-				if ($gitNew !== '') $git = $gitNew;
-				else break;
-			} else {
-				$git = trim($io->ask("Введите ссылку на репозиторий:\r\n"));
-			}
-		}
+		$git = self::askValid(
+			'Введите ссылку на репозиторий',
+			[
+				['preg' => true, 'message' => 'Ссылка на репозиторий не указана'],
+				['preg' => '/^ssh\:\/\/.+$/', 'message' => 'Не указан ssh протокол'],
+				['preg' => '/^ssh\:\/\/[^\/]+\:\d+\/.+$/', 'message' => 'Не указан порт'],
+				['preg' => '/^ssh\:\/\/[^@\/]+@[^@\/]+\:\d+\/.+$/', 'message' => 'Не указан пользователь'],
+			],
+			$io
+		);
 
 		//настраиваем конфиг рокетира
 		$configFile = self::getRootPath() . '/.rocketeer/config.php';
 		$config = file_get_contents($configFile);
+		//хост
 		$config = preg_replace(
 			'/(\'host\'\s*=>\s*\')[^\']*(\',)/',
 			'${1}' . addslashes($host) . '${2}',
 			$config
 		);
+		//имя пользователя
 		$config = preg_replace(
 			'/(\'username\'\s*=>\s*\')[^\']*(\',)/',
 			'${1}' . addslashes($username) . '${2}',
 			$config
 		);
+		//пароль
 		$config = preg_replace(
 			'/(\'password\'\s*=>\s*\')[^\']*(\',)/',
 			'${1}' . addslashes($password) . '${2}',
@@ -178,5 +124,56 @@ class Installer
 			$config
 		);
 		file_put_contents($scmFile, $config);
+	}
+
+	/**
+	 * Запрашиваем параметр с проверками
+	 * @param string $message
+	 * @param array $checks
+	 * @param mixed $io
+	 * @return string
+	 */
+	protected static function askValid($message, array $checks, $io)
+	{
+		$return = null;
+		while (true) {
+			$error = null;
+			if ($return !== null) {
+				foreach ($checks as $check) {
+					if (
+						$check['preg'] === true && empty($return)
+						|| ($check['preg'] !== true && !preg_match($check['preg'], $return))
+					){
+						$error = $check['message'];
+						break;
+					}
+				}
+				if ($error === null) break;
+			}
+			if (!empty($error)) {
+				$returnNew = trim($io->ask(
+					self::textToConsole("{$error} (введите заново или оставьте пустую строку, чтобы сохранить вариант '{$return}'):\r\n")
+				));
+				if ($returnNew !== '') $return = $returnNew;
+				else break;
+			} else {
+				$return = trim($io->ask(self::textToConsole("{$message}:\r\n")));
+			}
+		}
+		return $return;
+	}
+
+	/**
+	 * Проблема русских букв
+	 * @param string $message
+	 * @return string
+	 */
+	protected static function textToConsole($message)
+	{
+		if (strncasecmp(PHP_OS, 'WIN', 3) == 0) {
+			return iconv('UTF-8', 'CP1251', $message);
+		} else {
+			return $message;
+		}
 	}
 }
