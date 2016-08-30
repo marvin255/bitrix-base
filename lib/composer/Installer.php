@@ -27,6 +27,8 @@ class Installer
 			self::getRootPath() . '/composer.phar',
 			fopen('https://getcomposer.org/composer.phar', 'r')
 		);
+		//cсоздаем папку include
+		mkdir(self::getRootPath() . '/web/local/include');
 	}
 
 	/**

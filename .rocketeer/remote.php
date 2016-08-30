@@ -34,6 +34,7 @@ return [
         'web/bitrix/.settings.php',
         'web/bitrix/php_interface/dbconn.php',
         'web/bitrix/backup',
+        'web/local/include',
     ],
 
     // Execution

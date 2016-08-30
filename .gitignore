@@ -5,7 +5,8 @@ web/bitrix/php_interface/dbconn.php
 web/bitrix/stack_cache
 web/bitrix/backup/
 web/bitrix/upload/
-web/upload/
+web/upload
+web/local/include
 web/sitemap*
 web/bitrixsetup.php
 
