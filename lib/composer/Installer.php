@@ -93,6 +93,7 @@ class Installer
 			$io
 		);
 
+
 		//настраиваем конфиг рокетира
 		$configFile = self::getRootPath() . '/.rocketeer/config.php';
 		$config = file_get_contents($configFile);
@@ -115,6 +116,17 @@ class Installer
 			$config
 		);
 		file_put_contents($configFile, $config);
+
+
+		//настраиваем путь к проекту на сервере
+		$remoteFile = self::getRootPath() . '/.rocketeer/remote.php';
+		$config = file_get_contents($remoteFile);
+		$config = preg_replace(
+			'/(\'root_directory\'\s*=>\s*\')[^\']*(\',)/',
+			'${1}/var/www/' . addslashes($username) . '${2}',
+			$config
+		);
+		file_put_contents($remoteFile, $config);
 
 
 		//настраиваем ссылку на репозиторий
