@@ -26,3 +26,6 @@ site_checker_*.*
 
 
 .rocketeer/logs
+
+
+.vagrant
