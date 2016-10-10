@@ -24,10 +24,10 @@
 
 ?><!DOCTYPE html>
 <html>
-	<head>
-		<?php $APPLICATION->ShowHead(); ?>
-		<title><?php $APPLICATION->ShowTitle(); ?></title>
-	</head>
+    <head>
+        <?php $APPLICATION->ShowHead(); ?>
+        <title><?php $APPLICATION->ShowTitle(); ?></title>
+    </head>
 
-	<body>
-		<?php $APPLICATION->ShowPanel(); ?>
+    <body>
+        <?php $APPLICATION->ShowPanel(); ?>
