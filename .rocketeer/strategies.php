@@ -30,7 +30,7 @@ return [
     'test'         => 'Phpunit',
 
     // Which strategy to use to migrate your database
-    'migrate'      => '',
+    'migrate'      => '\\bxrocketeer\\migrations\\BitrixMigrateStrategy',
 
     // Which strategy to use to install your application's dependencies
     'dependencies' => 'Composer',

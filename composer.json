@@ -2,9 +2,8 @@
     "name": "marvin255/bitrix-base",
     "type": "project",
     "require": {
-      "symfony/console": "dev-master",
-      "marvin255/bxrocketeer": "dev-master",
-      "marvin255/bxmigrate": "dev-master"
+      "symfony/console": "*",
+      "marvin255/bxrocketeer": "dev-master"
     },
     "autoload": {
       "psr-4": { "app\\": "lib/" }
