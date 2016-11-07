@@ -3,7 +3,8 @@
     "type": "project",
     "require": {
       "symfony/console": "dev-master",
-      "marvin255/bxrocketeer": "dev-master"
+      "marvin255/bxrocketeer": "dev-master",
+      "marvin255/bxmigrate": "dev-master"
     },
     "autoload": {
       "psr-4": { "app\\": "lib/" }

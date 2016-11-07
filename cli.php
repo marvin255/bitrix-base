@@ -17,4 +17,8 @@ use Symfony\Component\Console\Application;
 
 $application = new Application();
 
+$application->add(new \marvin255\bxmigrate\cli\SymphonyUp());
+$application->add(new \marvin255\bxmigrate\cli\SymphonyDown());
+$application->add(new \marvin255\bxmigrate\cli\SymphonyCreate());
+
 $application->run();
