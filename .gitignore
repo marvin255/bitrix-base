@@ -1,3 +1,4 @@
+# ненужные файлы и папки битрикса
 web/bitrix/cache
 web/bitrix/managed_cache
 web/bitrix/.settings.php
@@ -11,21 +12,32 @@ web/sitemap*
 web/bitrixsetup.php
 
 
+# ненужные файлы и папки фронта
 frontend/node_modules
 frontend/bower_components
 frontend/build
 
 
+# ненужные файлы и папки IDE и операционных систем
 .DS_Store
 site_checker_*.*
 .idea/
 *.sublime-workspace
+.buildpath
+.project
+.settings
+nbproject
+Thumbs.db
+.~lock.*
 
 
+# composer
 /vendor
 
 
+# rocketeer
 .rocketeer/logs
 
 
+# vagrant
 .vagrant
