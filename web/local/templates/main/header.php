@@ -4,24 +4,16 @@
     }
 
     use Bitrix\Main\Page\Asset;
+    use Bitrix\Main\Application;
 
     global $APPLICATION;
 
-    define('BASE_TEMPLATE_PATH', str_replace('\\', '/', dirname(__FILE__)));
+    define('BASE_TEMPLATE_PATH', realpath(dirname(__FILE__)));
     define('BASE_TEMPLATE_URL', '/local/templates/main');
 
-    //дополнительная обработка данных, которые могут понадобиться в шаблоне
-    $arResult = array(
-        'isMain' => CSite::InDir('/index.php'),
-    );
-    if (file_exists(BASE_TEMPLATE_PATH.'/template.php')) {
-        $arResult = include BASE_TEMPLATE_PATH.'/template.php';
-    }
-
     //на случай, если унаследуем от этого шаблона новые, подключаем все скрипты и стили через битрикс
-    //$APPLICATION->AddHeadScript(BASE_TEMPLATE_URL . '/js/script.js', true);
-    //Asset::getInstance()->addJs(BASE_TEMPLATE_URL . '/css/style.css', true);
-
+    //Asset::getInstance()->addCss(BASE_TEMPLATE_URL.'/stylesheets/main.css', true);
+    //Asset::getInstance()->addJs(BASE_TEMPLATE_URL.'/javascripts/main.js', true);
 ?><!DOCTYPE html>
 <html>
     <head>
