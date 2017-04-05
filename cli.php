@@ -9,7 +9,6 @@ define('NO_KEEP_STATISTIC', true);
 define('NOT_CHECK_PERMISSIONS', true);
 define('CHK_EVENT', true);
 
-require_once(__DIR__.'/vendor/marvin255/bxmigrate/src/Autoloader.php');
 require $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php';
 
 define('CLI_MIGRATIONS_PATH', __DIR__.'/migrations');
