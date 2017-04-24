@@ -10,6 +10,7 @@ web/upload
 web/local/include
 web/sitemap*
 web/bitrixsetup.php
+web/restore.php
 web/bitrix/modules/updater_partner.log
 
 
