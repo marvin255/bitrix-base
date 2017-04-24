@@ -12,6 +12,8 @@
 
 2. Запустить команду: `php rocketeer.phar update`.
 
+3. В качестве скрипта для деплоя используется [rocketeer](https://github.com/rocketeers/rocketeer).
+
 
 
 Как развернуть проект на локальной машине
