@@ -51,11 +51,14 @@ EOF
 )
 echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
 
+# config php.ini for cli
+sudo sed -i "s/^\(short_open_tag\).*/\1 = On/" /etc/php5/cli/php.ini
+
 # enable mod_rewrite
 sudo a2enmod rewrite
 
 # restart apache
-service apache2 restart
+sudo service apache2 restart
 
 # install git
 sudo apt-get -y install git
