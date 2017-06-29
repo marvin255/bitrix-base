@@ -52,8 +52,10 @@ EOF
 )
 echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
 
-# config php.ini for cli
+# config php.ini
 sudo sed -i "s/^\(short_open_tag\).*/\1 = On/" /etc/php5/cli/php.ini
+sudo sed -i "s/^\(post_max_size\).*/\1 = 500M/" /etc/php5/apache2/php.ini
+sudo sed -i "s/^\(upload_max_filesize\).*/\1 = 500M/" /etc/php5/apache2/php.ini
 
 # enable mod_rewrite
 sudo a2enmod rewrite
