@@ -33,6 +33,7 @@ User vagrant
 <VirtualHost *:80>
     DocumentRoot "/var/www/bitrix-base/web"
     <Directory "/var/www/bitrix-base/web">
+        DirectorySlash Off
         AllowOverride All
         Options -Indexes
         Require all granted
