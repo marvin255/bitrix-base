@@ -38,14 +38,16 @@ require $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.ph
 //Проверяем существование symfony console
 if (!class_exists('\Symfony\Component\Console\Application')) {
     echo "\033[31m";
-    echo "    Class `\Symfony\Component\Console\Application` not found";
-    echo "\n\r    Please check that `vendor/autoload.php` is included";
+    echo "    Class `\Symfony\Component\Console\Application` not found:";
+    echo "\n\r    1. please check that you ran `composer install`";
+    echo "\n\r    2. please check that `vendor/autoload.php` is included";
     echo "\033[0m \n\r\n\r";
     die();
 }
 
 //Инициируем symfony console
 $application = new \Symfony\Component\Console\Application;
+$application->add(new \app\bitrixbase\AgentsRunner($_SERVER['DOCUMENT_ROOT']));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyUp(__DIR__.'/migrations'));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyDown(__DIR__.'/migrations'));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyCreate(__DIR__.'/migrations'));
