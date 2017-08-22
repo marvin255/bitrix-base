@@ -3,6 +3,8 @@ web/bitrix/cache
 web/bitrix/managed_cache
 web/bitrix/.settings.php
 web/bitrix/php_interface/dbconn.php
+web/bitrix/php_interface/sqlmode_d7.php
+web/bitrix/php_interface/sqlmode.php
 web/bitrix/stack_cache
 web/bitrix/backup/
 web/bitrix/upload/
@@ -10,6 +12,7 @@ web/upload
 web/local/include
 web/sitemap*
 web/bitrixsetup.php
+web/mysql_debug.sql
 web/restore.php
 web/bitrix/modules/updater_partner.log
 
@@ -43,3 +46,9 @@ Thumbs.db
 
 # vagrant
 .vagrant
+
+
+# apache conf
+
+Apache-2.4_vhost.conf
+Apache-2.4-x64_vhost.conf
