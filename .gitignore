@@ -49,6 +49,12 @@ Thumbs.db
 
 
 # apache conf
-
 Apache-2.4_vhost.conf
 Apache-2.4-x64_vhost.conf
+
+
+# опасные файлы технических скриптов
+*phpMyAdmin*
+*phpmyadmin*
+*myadmin*
+*adminer.php*
