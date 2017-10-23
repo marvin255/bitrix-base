@@ -14,21 +14,21 @@ class Installer
     {
         //загружаем свежую версию rocketeer
         file_put_contents(
-            self::getRootPath().'/rocketeer.phar',
+            self::getRootPath() . '/rocketeer.phar',
             fopen('http://rocketeer.autopergamene.eu/versions/rocketeer.phar', 'r')
         );
         //загружаем свежую версию bitrixsetup.php
         file_put_contents(
-            self::getRootPath().'/web/bitrixsetup.php',
+            self::getRootPath() . '/web/bitrixsetup.php',
             fopen('http://www.1c-bitrix.ru/download/scripts/bitrixsetup.php', 'r')
         );
         //загружаем свежую версию composer
         file_put_contents(
-            self::getRootPath().'/composer.phar',
+            self::getRootPath() . '/composer.phar',
             fopen('https://getcomposer.org/composer.phar', 'r')
         );
         //cсоздаем папку include
-        mkdir(self::getRootPath().'/web/local/include');
+        mkdir(self::getRootPath() . '/web/local/include');
     }
 
     /**
@@ -93,44 +93,44 @@ class Installer
         );
 
         //настраиваем конфиг рокетира
-        $configFile = self::getRootPath().'/.rocketeer/config.php';
+        $configFile = self::getRootPath() . '/.rocketeer/config.php';
         $config = file_get_contents($configFile);
         //хост
         $config = preg_replace(
             '/(\'host\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}'.addslashes($host).'${2}',
+            '${1}' . addslashes($host) . '${2}',
             $config
         );
         //имя пользователя
         $config = preg_replace(
             '/(\'username\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}'.addslashes($username).'${2}',
+            '${1}' . addslashes($username) . '${2}',
             $config
         );
         //пароль
         $config = preg_replace(
             '/(\'password\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}'.addslashes($password).'${2}',
+            '${1}' . addslashes($password) . '${2}',
             $config
         );
         file_put_contents($configFile, $config);
 
         //настраиваем путь к проекту на сервере
-        $remoteFile = self::getRootPath().'/.rocketeer/remote.php';
+        $remoteFile = self::getRootPath() . '/.rocketeer/remote.php';
         $config = file_get_contents($remoteFile);
         $config = preg_replace(
             '/(\'root_directory\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}/var/www/'.addslashes($username).'${2}',
+            '${1}/var/www/' . addslashes($username) . '${2}',
             $config
         );
         file_put_contents($remoteFile, $config);
 
         //настраиваем ссылку на репозиторий
-        $scmFile = self::getRootPath().'/.rocketeer/scm.php';
+        $scmFile = self::getRootPath() . '/.rocketeer/scm.php';
         $config = file_get_contents($scmFile);
         $config = preg_replace(
             '/(\'repository\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}'.addslashes($git).'${2}',
+            '${1}' . addslashes($git) . '${2}',
             $config
         );
         file_put_contents($scmFile, $config);

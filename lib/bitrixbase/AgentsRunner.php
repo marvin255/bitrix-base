@@ -3,7 +3,6 @@
 namespace app\bitrixbase;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -47,17 +46,16 @@ class AgentsRunner extends Command
         $output->writeln("<info>Running bitrix's agents...</info>");
 
         \CAgent::CheckAgents();
-        define("BX_CRONTAB_SUPPORT", true);
-        define("BX_CRONTAB", true);
+        define('BX_CRONTAB_SUPPORT', true);
+        define('BX_CRONTAB', true);
         \CEvent::CheckEvents();
 
-        if (\CModule::IncludeModule('sender'))
-        {
+        if (\CModule::IncludeModule('sender')) {
             \Bitrix\Sender\MailingManager::checkPeriod(false);
             \Bitrix\Sender\MailingManager::checkSend();
         }
 
-        require($this->documentRoot . '/bitrix/modules/main/tools/backup.php');
+        require $this->documentRoot . '/bitrix/modules/main/tools/backup.php';
 
         $output->writeln("<info>Bitrix's agents completed</info>");
     }

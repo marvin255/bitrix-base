@@ -1,0 +1,27 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->exclude([
+        '.git',
+        '.rocketeer',
+        '.vagrant',
+        'documents',
+        'examples',
+        'frontend',
+        'vagrant_stuff',
+        'vendor',
+        'web/bitrix',
+        'web/upload',
+    ])
+    ->in(__DIR__)
+;
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony' => true,
+        'new_with_braces' => false,
+        'phpdoc_inline_tag' => false,
+        'concat_space' => ['spacing' => 'one'],
+    ])
+    ->setFinder($finder)
+;

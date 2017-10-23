@@ -58,3 +58,7 @@ Apache-2.4-x64_vhost.conf
 *phpmyadmin*
 *myadmin*
 *adminer.php*
+
+
+# кэш cod style fixer'а
+.php_cs.cache
