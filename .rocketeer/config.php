@@ -1,8 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
+use bxrocketeer\Registrator;
 use Rocketeer\Services\Connections\ConnectionsHandler;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 return [
 
@@ -16,7 +17,7 @@ return [
 
     // The plugins to load
     'plugins'          => [
-        '\bxrocketeer\Registrator',
+        Registrator::class,
     ],
 
     // Logging
@@ -75,7 +76,7 @@ return [
     // ),
     ////////////////////////////////////////////////////////////////////
 
-    'on'               => [
+    'on' => [
 
         // Stages configurations
         'stages'      => [],

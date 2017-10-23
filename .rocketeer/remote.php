@@ -50,15 +50,15 @@ return [
     // Enable use of sudo for some commands
     // You can specify a sudo user by doing
     // 'sudo' => 'the_user'
-    'sudo' => false,
+    'sudo'           => false,
 
     // An array of commands to run under sudo
-    'sudoed' => [],
+    'sudoed'         => [],
 
     // Permissions$
     ////////////////////////////////////////////////////////////////////
 
-    'permissions'    => [
+    'permissions' => [
 
         /*
         // The folders and files to set as web writable

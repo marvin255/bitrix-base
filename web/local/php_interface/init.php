@@ -2,7 +2,7 @@
 
 
 //Подключаем автозагрузку классов композера.
-require_once(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require_once dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 //подключаем общие функции для всего проекта
 require_once __DIR__ . '/include/functions.php';
