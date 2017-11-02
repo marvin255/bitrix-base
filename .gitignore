@@ -15,6 +15,7 @@ web/bitrixsetup.php
 web/mysql_debug.sql
 web/restore.php
 web/bitrix/modules/updater_partner.log
+web/bitrix/modules/updater.log
 
 
 # ненужные файлы и папки фронта
