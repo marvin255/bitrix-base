@@ -14,9 +14,9 @@ return [
     //////////////////////////////////////////////////////////////////////
     // Tasks to execute before the core Rocketeer Tasks
     'before' => [
-        'setup'   => [],
-        'deploy'  => [],
-        'cleanup' => [],
+        'setup'        => [],
+        'deploy'       => [],
+        'cleanup'      => [],
         'dependencies' => [],
     ],
     // Tasks to execute after the core Rocketeer Tasks

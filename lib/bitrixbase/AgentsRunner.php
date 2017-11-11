@@ -2,6 +2,7 @@
 
 namespace app\bitrixbase;
 
+use Bitrix\Sender\MailingManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -14,23 +15,25 @@ class AgentsRunner extends Command
     /**
      * @var string
      */
-    protected $documentRoot = null;
+    protected $documentRoot;
 
     /**
      * @inheritdoc
+     * @throws \InvalidArgumentException
      */
     public function __construct($documentRoot)
     {
         if (empty($documentRoot)) {
-            throw new InvalidArgumentException('Document root can not be empty');
+            throw new \InvalidArgumentException('Document root can not be empty');
         }
         $this->documentRoot = $documentRoot;
 
-        return parent::__construct();
+        parent::__construct();
     }
 
     /**
      * @inheritdoc
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function configure()
     {
@@ -51,8 +54,8 @@ class AgentsRunner extends Command
         \CEvent::CheckEvents();
 
         if (\CModule::IncludeModule('sender')) {
-            \Bitrix\Sender\MailingManager::checkPeriod(false);
-            \Bitrix\Sender\MailingManager::checkSend();
+            MailingManager::checkPeriod(false);
+            MailingManager::checkSend();
         }
 
         require $this->documentRoot . '/bitrix/modules/main/tools/backup.php';

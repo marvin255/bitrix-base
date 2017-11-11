@@ -9,6 +9,10 @@ class Installer
 {
     /**
      * Событие после создания проекта. Копируем свежие версии rocketeer, composer и bitrixsetup.php.
+     *
+     * @param $event
+     *
+     * @throws \RuntimeException
      */
     public static function postCreateProject($event)
     {
@@ -27,8 +31,11 @@ class Installer
             self::getRootPath() . '/composer.phar',
             fopen('https://getcomposer.org/composer.phar', 'r')
         );
-        //cсоздаем папку include
-        mkdir(self::getRootPath() . '/web/local/include');
+        //cоздаем папку include
+        if (!mkdir(self::getRootPath() . '/web/local/include') && !is_dir(self::getRootPath() . '/web/local/include')) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created',
+                self::getRootPath() . '/web/local/include'));
+        }
     }
 
     /**
@@ -43,6 +50,8 @@ class Installer
 
     /**
      * Событие для интерактивной настройки проекта.
+     *
+     * @param $event
      */
     public static function configureProject($event)
     {
@@ -153,7 +162,7 @@ class Installer
             if ($return !== null) {
                 foreach ($checks as $check) {
                     if (
-                        $check['preg'] === true && empty($return)
+                        ($check['preg'] === true && empty($return))
                         || ($check['preg'] !== true && !preg_match($check['preg'], $return))
                     ) {
                         $error = $check['message'];
@@ -192,9 +201,9 @@ class Installer
     {
         if (strncasecmp(PHP_OS, 'WIN', 3) == 0) {
             return self::translit($message);
-        } else {
-            return $message;
         }
+
+        return $message;
     }
 
     /**
@@ -206,8 +215,8 @@ class Installer
      */
     protected static function translit($str)
     {
-        $rus = array('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я');
-        $lat = array('A', 'B', 'V', 'G', 'D', 'E', 'E', 'Gh', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'C', 'Ch', 'Sh', 'Sch', 'Y', 'Y', 'Y', 'E', 'Yu', 'Ya', 'a', 'b', 'v', 'g', 'd', 'e', 'e', 'gh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', 'y', 'e', 'yu', 'ya');
+        $rus = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'];
+        $lat = ['A', 'B', 'V', 'G', 'D', 'E', 'E', 'Gh', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'C', 'Ch', 'Sh', 'Sch', 'Y', 'Y', 'Y', 'E', 'Yu', 'Ya', 'a', 'b', 'v', 'g', 'd', 'e', 'e', 'gh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', 'y', 'e', 'yu', 'ya'];
 
         return str_replace($rus, $lat, $str);
     }

@@ -9,6 +9,7 @@
  * file that was distributed with this source code.
  */
 
+use bxrocketeer\migrations\BitrixMigrateStrategy;
 use Rocketeer\Binaries\PackageManagers\Composer;
 use Rocketeer\Tasks\Subtasks\Primer;
 
@@ -30,7 +31,7 @@ return [
     'test'         => 'Phpunit',
 
     // Which strategy to use to migrate your database
-    'migrate'      => '\\bxrocketeer\\migrations\\BitrixMigrateStrategy',
+    'migrate'      => BitrixMigrateStrategy::class,
 
     // Which strategy to use to install your application's dependencies
     'dependencies' => 'Composer',
@@ -38,7 +39,7 @@ return [
     // Execution hooks
     //////////////////////////////////////////////////////////////////////
 
-    'composer'     => [
+    'composer' => [
         'install' => function (Composer $composer, $task) {
             return $composer->install([], ['--no-interaction' => null, '--no-dev' => null, '--prefer-dist' => null]);
         },
@@ -51,7 +52,7 @@ return [
     // which will run a set of commands on the local
     // machine, determining whether the deploy can proceed
     // or not
-    'primer'       => function (Primer $task) {
+    'primer'   => function (Primer $task) {
         return [
             // $task->executeTask('Test'),
             // $task->binary('grunt')->execute('lint'),

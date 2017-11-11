@@ -8,7 +8,7 @@ $_SERVER['DOCUMENT_ROOT'] = realpath(__DIR__ . '/web');
 $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
 
 //Проверяем, чтобы использование которткого синтаксиса тегов было включено
-if ((int) ini_get('short_open_tag') === 0) {
+if ((int)ini_get('short_open_tag') === 0) {
     $phpini = php_ini_loaded_file();
     echo "\033[31m";
     echo '    short_open_tag parameter is off:';
@@ -37,7 +37,7 @@ define('NOT_CHECK_PERMISSIONS', true);
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
 //Проверяем существование symfony console
-if (!class_exists('\Symfony\Component\Console\Application')) {
+if (!class_exists(\Symfony\Component\Console\Application::class)) {
     echo "\033[31m";
     echo "    Class `\Symfony\Component\Console\Application` not found:";
     echo "\n\r    1. please check that you ran `composer install`";
