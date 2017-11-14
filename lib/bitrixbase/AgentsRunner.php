@@ -2,9 +2,14 @@
 
 namespace app\bitrixbase;
 
+use Bitrix\Sender\MailingManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use CAgent;
+use CEvent;
+use CModule;
+use InvalidArgumentException;
 
 /**
  * Консольная командя для запуска агентов битрикса по cron.
@@ -14,10 +19,12 @@ class AgentsRunner extends Command
     /**
      * @var string
      */
-    protected $documentRoot = null;
+    protected $documentRoot;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($documentRoot)
     {
@@ -26,7 +33,7 @@ class AgentsRunner extends Command
         }
         $this->documentRoot = $documentRoot;
 
-        return parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -45,14 +52,14 @@ class AgentsRunner extends Command
     {
         $output->writeln("<info>Running bitrix's agents...</info>");
 
-        \CAgent::CheckAgents();
+        CAgent::CheckAgents();
         define('BX_CRONTAB_SUPPORT', true);
         define('BX_CRONTAB', true);
-        \CEvent::CheckEvents();
+        CEvent::CheckEvents();
 
-        if (\CModule::IncludeModule('sender')) {
-            \Bitrix\Sender\MailingManager::checkPeriod(false);
-            \Bitrix\Sender\MailingManager::checkSend();
+        if (CModule::IncludeModule('sender')) {
+            MailingManager::checkPeriod(false);
+            MailingManager::checkSend();
         }
 
         require $this->documentRoot . '/bitrix/modules/main/tools/backup.php';
