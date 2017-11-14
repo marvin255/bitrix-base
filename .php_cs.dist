@@ -13,6 +13,7 @@ $finder = PhpCsFixer\Finder::create()
         'web/bitrix',
         'web/upload',
     ])
+    ->notName('urlrewrite.php')
     ->in(__DIR__)
 ;
 
