@@ -6,8 +6,8 @@ web/bitrix/php_interface/dbconn.php
 web/bitrix/php_interface/sqlmode_d7.php
 web/bitrix/php_interface/sqlmode.php
 web/bitrix/stack_cache
-web/bitrix/backup/
-web/bitrix/upload/
+web/bitrix/backup
+web/bitrix/upload
 web/upload
 web/sitemap*
 web/bitrixsetup.php
@@ -26,7 +26,7 @@ frontend/build
 # ненужные файлы и папки IDE и операционных систем
 .DS_Store
 site_checker_*.*
-.idea/
+.idea
 *.sublime-workspace
 .buildpath
 .project
@@ -37,7 +37,7 @@ Thumbs.db
 
 
 # composer
-/vendor
+vendor
 
 
 # rocketeer
