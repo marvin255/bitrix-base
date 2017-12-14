@@ -16,11 +16,11 @@
         "ext-hash": "*",
         "symfony/console": "3.2.*",
         "marvin255/bxmigrate": "<2.0",
-        "marvin255/bxrocketeer": "dev-master",
-        "codeception/codeception": "^2.3"
+        "marvin255/bxrocketeer": "dev-master"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "<2.6.0"
+        "friendsofphp/php-cs-fixer": "<2.6.0",
+        "codeception/codeception": "^2.3"
     },
     "autoload": {
         "psr-4": { "app\\": "lib/" }
