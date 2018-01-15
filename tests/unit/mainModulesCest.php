@@ -28,5 +28,4 @@ class mainModulesCest
 //    {
 //        $I->assertTrue(Loader::includeModule('vote'));
 //    }
-
 }
