@@ -23,7 +23,7 @@ echo "sql-mode=\"\"" >> /etc/mysql/my.cnf
 sudo service mysql restart
 
 # install apache and php
-sudo apt-get install -y php5.6 php5.6-cli php5.6-mysql php5.6-gd php5.6-mcrypt php5.6-sqlite php5.6-json php5.6-curl php5.6-mbstring php5.6-xml apache2 libapache2-mod-php5.6
+sudo apt-get install -y php5.6 php5.6-cli php5.6-mysql php5.6-gd php5.6-mcrypt php5.6-sqlite php5.6-json php5.6-zip php5.6-soap php5.6-curl php5.6-mbstring php5.6-xml apache2 libapache2-mod-php5.6
 sudo phpenmod mcrypt
 
 # config php.ini
