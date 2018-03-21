@@ -65,7 +65,6 @@ User ${CURRENT_USER}
         Require all granted
 
         php_admin_value mbstring.func_overload 2
-        php_value mbstring.internal_encoding utf8
         php_value default_charset utf-8
     </Directory>
 </VirtualHost>
