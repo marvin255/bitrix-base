@@ -31,11 +31,6 @@ class Installer
             self::getRootPath() . '/composer.phar',
             fopen('https://getcomposer.org/composer.phar', 'r')
         );
-        //cоздаем папку include
-        if (!mkdir(self::getRootPath() . '/web/local/include') && !is_dir(self::getRootPath() . '/web/local/include')) {
-            throw new \RuntimeException(sprintf('Directory "%s" was not created',
-                self::getRootPath() . '/web/local/include'));
-        }
     }
 
     /**
