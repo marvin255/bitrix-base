@@ -18,5 +18,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Define the bootstrap file: A (shell) script that runs after first setup of your box (= provisioning)
   config.vm.provision :shell, path: "vagrant_stuff/bootstrap.sh"
+  
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+  end
 
 end
