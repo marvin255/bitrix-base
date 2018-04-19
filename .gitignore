@@ -48,9 +48,10 @@ vendor
 .vagrant
 
 
-# apache conf
-Apache-2.4_vhost.conf
-Apache-2.4-x64_vhost.conf
+# apache & nginx conf
+*vhost.conf
+*vhosta.conf
+*vhostn.conf
 
 
 # опасные файлы технических скриптов
