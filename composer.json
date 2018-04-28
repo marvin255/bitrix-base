@@ -35,10 +35,6 @@
         {
             "type": "git",
             "url": "https://github.com/marvin255/bxrocketeer"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/marvin255/bxmigrate"
         }
     ]
 }
