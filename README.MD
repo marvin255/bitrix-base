@@ -10,7 +10,18 @@
 
 1. Перейти в консоли в корневую папку репозитория.
 
-2. Запустить команду: `php rocketeer.phar update`.
+2. Запустить команду: `php rocketeer.phar update --migrate --on=prod`.
+
+3. В качестве скрипта для деплоя используется [rocketeer](https://github.com/rocketeers/rocketeer).
+
+
+
+Как отправить изменения на тестовый сервер
+----------------------------------------
+
+1. Перейти в консоли в корневую папку репозитория.
+
+2. Запустить команду: `php rocketeer.phar update --migrate --on=dev`.
 
 3. В качестве скрипта для деплоя используется [rocketeer](https://github.com/rocketeers/rocketeer).
 
