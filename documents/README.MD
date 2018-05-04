@@ -10,7 +10,7 @@
 |---------------------------|----------------------------------|---------------------------------------------------------|
 | composer/composer         | менеджер зависимостей            | https://getcomposer.org/doc/                            |
 | symfony/console           | запуск скриптов из консоли       | https://symfony.com/doc/current/components/console.html |
-| marvin255/bxmigrate       | управление миграциями для БД     | https://github.com/marvin255/bxmigrate                  |
+| marvin255/bxmigrate       | управление миграциями БД         | https://github.com/marvin255/bxmigrate                  |
 | friendsofphp/php-cs-fixer | проверка стиля кода              | https://github.com/FriendsOfPHP/PHP-CS-Fixer            |
 | codeception/codeception   | управление тестированием         | https://codeception.com/docs/01-Introduction            |
 | rocketeers/rocketeer      | автоматически деплой             | http://rocketeer.autopergamene.eu/                      |
