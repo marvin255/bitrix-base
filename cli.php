@@ -1,8 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-echo "\n\r\033[32m<---- Console runner for Bitrix ---->\033[0m \n\r\n\r";
-
 //Определяем DOCUMENT_ROOT - без него битрикс не работает
 $_SERVER['DOCUMENT_ROOT'] = realpath(__DIR__ . '/web');
 $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
@@ -47,7 +45,7 @@ if (!class_exists('\Symfony\Component\Console\Application')) {
 }
 
 //Инициируем symfony console
-$application = new \Symfony\Component\Console\Application;
+$application = new \Symfony\Component\Console\Application('Console runner for Bitrix');
 $application->add(new \marvin255\bxmigrate\cli\SymphonyUp(__DIR__ . '/migrations'));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyDown(__DIR__ . '/migrations'));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyCreate(__DIR__ . '/migrations'));
