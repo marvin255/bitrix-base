@@ -51,4 +51,5 @@ $application = new \Symfony\Component\Console\Application;
 $application->add(new \marvin255\bxmigrate\cli\SymphonyUp(__DIR__ . '/migrations'));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyDown(__DIR__ . '/migrations'));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyCreate(__DIR__ . '/migrations'));
+$application->add(new \app\base\console\CacheClear);
 $application->run();
