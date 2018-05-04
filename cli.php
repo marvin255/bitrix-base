@@ -31,6 +31,7 @@ if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolo
 define('NO_KEEP_STATISTIC', true);
 define('NOT_CHECK_PERMISSIONS', true);
 define('NO_AGENT_CHECK', true);
+define('PERFMON_STOP', true);
 
 //Подключаем пролог битрикса
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';

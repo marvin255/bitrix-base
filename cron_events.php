@@ -9,6 +9,7 @@ define('NO_KEEP_STATISTIC', true);
 define('NOT_CHECK_PERMISSIONS', true);
 define('BX_NO_ACCELERATOR_RESET', true);
 define('CHK_EVENT', true);
+define('PERFMON_STOP', true);
 
 //Подключаем пролог битрикса
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
