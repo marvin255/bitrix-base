@@ -3,11 +3,12 @@
 
 
 
-Библиотеки composer, использованные в проекте
----------------------------------------------
+Библиотеки, использованные в проекте
+------------------------------------
 
 |          Название         |            Назначение            |                       Ссылка                            |
 |---------------------------|----------------------------------|---------------------------------------------------------|
+| composer/composer         | менеджер зависимостей            | https://getcomposer.org/doc/                            |
 | symfony/console           | запуск скриптов из консоли       | https://symfony.com/doc/current/components/console.html |
 | marvin255/bxmigrate       | управление миграциями для БД     | https://github.com/marvin255/bxmigrate                  |
 | friendsofphp/php-cs-fixer | проверка стиля кода в проекте    | https://github.com/FriendsOfPHP/PHP-CS-Fixer            |
