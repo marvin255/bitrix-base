@@ -46,8 +46,14 @@ if (!class_exists('\Symfony\Component\Console\Application')) {
 
 //Инициируем symfony console
 $application = new \Symfony\Component\Console\Application('Console runner for Bitrix');
-$application->add(new \marvin255\bxmigrate\cli\SymphonyUp(__DIR__ . '/migrations'));
-$application->add(new \marvin255\bxmigrate\cli\SymphonyDown(__DIR__ . '/migrations'));
-$application->add(new \marvin255\bxmigrate\cli\SymphonyCreate(__DIR__ . '/migrations'));
+
+//Команды миграций
+$migrations = __DIR__ . '/migrations';
+$application->add((new \marvin255\bxmigrate\cli\SymphonyUp)->setMigrationPath($migrations));
+$application->add((new \marvin255\bxmigrate\cli\SymphonyDown)->setMigrationPath($migrations));
+$application->add((new \marvin255\bxmigrate\cli\SymphonyCreate)->setMigrationPath($migrations));
+
+//Команды проекта
 $application->add(new \app\base\console\CacheClear);
+
 $application->run();
