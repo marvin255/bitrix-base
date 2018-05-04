@@ -11,9 +11,9 @@
 | composer/composer         | менеджер зависимостей            | https://getcomposer.org/doc/                            |
 | symfony/console           | запуск скриптов из консоли       | https://symfony.com/doc/current/components/console.html |
 | marvin255/bxmigrate       | управление миграциями для БД     | https://github.com/marvin255/bxmigrate                  |
-| friendsofphp/php-cs-fixer | проверка стиля кода в проекте    | https://github.com/FriendsOfPHP/PHP-CS-Fixer            |
-| codeception/codeception   | управление тестированием проекта | https://codeception.com/docs/01-Introduction            |
-| rocketeers/rocketeer      | автоматически деплой проекта     | http://rocketeer.autopergamene.eu/                      |
+| friendsofphp/php-cs-fixer | проверка стиля кода              | https://github.com/FriendsOfPHP/PHP-CS-Fixer            |
+| codeception/codeception   | управление тестированием         | https://codeception.com/docs/01-Introduction            |
+| rocketeers/rocketeer      | автоматически деплой             | http://rocketeer.autopergamene.eu/                      |
 
 
 
