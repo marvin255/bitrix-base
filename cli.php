@@ -30,8 +30,7 @@ if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolo
 //Отключаем сбор статистики и выполнение агентов
 define('NO_KEEP_STATISTIC', true);
 define('NOT_CHECK_PERMISSIONS', true);
-//Раскомментировать, если не нужно запускать агенты из этого скрипта
-//define('NO_AGENT_CHECK', true);
+define('NO_AGENT_CHECK', true);
 
 //Подключаем пролог битрикса
 require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
@@ -48,7 +47,6 @@ if (!class_exists('\Symfony\Component\Console\Application')) {
 
 //Инициируем symfony console
 $application = new \Symfony\Component\Console\Application;
-$application->add(new \app\bitrixbase\AgentsRunner($_SERVER['DOCUMENT_ROOT']));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyUp(__DIR__ . '/migrations'));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyDown(__DIR__ . '/migrations'));
 $application->add(new \marvin255\bxmigrate\cli\SymphonyCreate(__DIR__ . '/migrations'));
