@@ -149,6 +149,7 @@ Vagrant
 17. **codeception.yml** описание и настройки тестов codeception.
 18. **composer.json** файл настройки composer.
 19. **composer.phar** файл со скриптом composer.
+19. **cron_events.php** скрипт для запуска агентов битрикс с помощью cron.
 20. **rocketeer.phar** файл со скриптом rocketeer.
 
 
