@@ -15,7 +15,7 @@
         "ext-zlib": "*",
         "ext-hash": "*",
         "symfony/console": "~3.2",
-        "marvin255/bxmigrate": "~2.0",
+        "marvin255/bxmigrate": "~3.0",
         "marvin255/bxrocketeer": "dev-master"
     },
     "require-dev": {

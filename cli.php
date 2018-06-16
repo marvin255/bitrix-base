@@ -49,9 +49,7 @@ $application = new \Symfony\Component\Console\Application('Console runner for Bi
 
 //Команды миграций
 $migrations = __DIR__ . '/migrations';
-$application->add((new \marvin255\bxmigrate\cli\SymphonyUp)->setMigrationPath($migrations));
-$application->add((new \marvin255\bxmigrate\cli\SymphonyDown)->setMigrationPath($migrations));
-$application->add((new \marvin255\bxmigrate\cli\SymphonyCreate)->setMigrationPath($migrations));
+\marvin255\bxmigrate\cli\Factory::registerCommands($application, $migrations);
 
 //Команды проекта
 $application->add(new \app\base\console\CacheClear);
