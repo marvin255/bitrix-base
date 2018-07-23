@@ -51,6 +51,9 @@ $application = new \Symfony\Component\Console\Application('Console runner for Bi
 $migrations = __DIR__ . '/migrations';
 \marvin255\bxmigrate\cli\Factory::registerCommands($application, $migrations);
 
+//Команды кодогенератора
+\marvin255\bxcodegen\Factory::registerCommands($application, __DIR__ . '/.bxcodegen.yaml');
+
 //Команды проекта
 $application->add(new \app\base\console\CacheClear);
 
