@@ -1,0 +1,15 @@
+services:
+    pathManager:
+        - marvin255\bxcodegen\service\path\PathManager
+        - '@currDir'
+        - {components: /web/local/components, modules: /web/local/modules}
+    renderer:
+        - marvin255\bxcodegen\service\renderer\Twig
+    copier:
+        - marvin255\bxcodegen\service\filesystem\Copier
+
+generators:
+    component:
+        class: marvin255\bxcodegen\generator\Component
+    module:
+        class: marvin255\bxcodegen\generator\Module
