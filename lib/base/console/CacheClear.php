@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Консольная командя для управления кэшем битрикса.
+ * Консольная команда для управления кэшем битрикса.
  */
 class CacheClear extends Command
 {
