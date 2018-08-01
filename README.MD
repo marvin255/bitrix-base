@@ -155,17 +155,18 @@ Vagrant
 			2. **include/events.php** файл, в котором будут определены все обработчики событий «1С-Битрикс: Управление сайтом».
 			3. **include/functions.php** файл, в котором будут определены все дополнительные функции, нужные проекту.
 			4. **init.php** файл, который подключается при каждом запуске битрикса и служит для определения дополнительных классов и функций.
-11. **.gitignore** служебный файл git, который исключает некоторый файлы и папки из репозитория.
-12. **.php_cs.dist** служебный файл [php cs fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) с настройками стиля кода проекта.
-13. **LICENSE** текст лицензии, согласно которой распространяется проект.
-14. **README.MD** файл в формате [markdown](https://ru.wikipedia.org/wiki/Markdown) с кратким описанием проекта.
-15. **Vagrantfile** файл с описаниями настроек vagrant.
-16. **cli.php** php скрипт для запуска приложения из консоли.
-17. **codeception.yml** описание и настройки тестов codeception.
-18. **composer.json** файл настройки composer.
-19. **composer.phar** файл со скриптом composer.
-19. **cron_events.php** скрипт для запуска агентов битрикс с помощью cron.
-20. **rocketeer.phar** файл со скриптом rocketeer.
+11. **.bxcodegen.yaml** служебный файл с настройками [кодогенерации](https://github.com/marvin255/bxcodegen).
+12. **.gitignore** служебный файл git, который исключает некоторый файлы и папки из репозитория.
+13. **.php_cs.dist** служебный файл [php cs fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) с настройками стиля кода проекта.
+14. **LICENSE** текст лицензии, согласно которой распространяется проект.
+15. **README.MD** файл в формате [markdown](https://ru.wikipedia.org/wiki/Markdown) с кратким описанием проекта.
+16. **Vagrantfile** файл с описаниями настроек vagrant.
+17. **cli.php** php скрипт для запуска приложения из консоли.
+18. **codeception.yml** описание и настройки тестов codeception.
+19. **composer.json** файл настройки composer.
+20. **composer.phar** файл со скриптом composer.
+21. **cron_events.php** скрипт для запуска агентов битрикс с помощью cron.
+22. **rocketeer.phar** файл со скриптом rocketeer.
 
 
 
