@@ -44,8 +44,10 @@ vendor
 .rocketeer/logs
 
 
-# vagrant
-.vagrant
+# docker
+/docker/.env
+/docker/logs/*
+!/docker/logs/.gitkeep
 
 
 # apache & nginx conf
