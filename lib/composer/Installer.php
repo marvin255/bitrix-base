@@ -2,6 +2,9 @@
 
 namespace app\composer;
 
+use InvalidArgumentException;
+use marvin255\bxcodegen;
+
 /**
  * Установка базового приложения для битрикса.
  */
@@ -34,6 +37,51 @@ class Installer
     }
 
     /**
+     * Событие для интерактивной настройки проекта.
+     *
+     * @param $event
+     */
+    public static function configureProject($event)
+    {
+        //запрашиваем имя проекта
+        $projectName = $event->getIO()->askAndValidate(
+            self::textToConsole("Укажите название проекта латиницей:\r\n"),
+            function ($value) {
+                if (!preg_match('/^[a-z0-9]+$/i', $value)) {
+                    throw new InvalidArgumentException(
+                        self::textToConsole('Укажите название проекта латиницей')
+                    );
+                }
+
+                return $value;
+            }
+        );
+        self::createMainModule($projectName, self::getRootPath());
+    }
+
+    /**
+     * Создает главный модуль сайта по названию и пути.
+     *
+     * @param string $siteName
+     * @param string $rootFolder
+     */
+    protected static function createMainModule($siteName, $rootFolder)
+    {
+        $options = new bxcodegen\service\options\Collection([
+            'name' => "{$siteName}.main",
+        ]);
+        $pathManager = new bxcodegen\service\path\PathManager($rootFolder, [
+            'modules' => '/web/local/modules',
+        ]);
+        $locator = new bxcodegen\ServiceLocator;
+        $locator->set('pathManager', $pathManager);
+        $locator->set('renderer', new bxcodegen\service\renderer\Twig);
+        $locator->set('copier', new bxcodegen\service\filesystem\Copier);
+
+        (new bxcodegen\generator\Module)->generate($options, $locator);
+    }
+
+    /**
      * Возвращает путь до корневой папки проекта.
      *
      * @return string
@@ -41,148 +89,6 @@ class Installer
     public static function getRootPath()
     {
         return dirname(dirname(__DIR__));
-    }
-
-    /**
-     * Событие для интерактивной настройки проекта.
-     *
-     * @param $event
-     */
-    public static function configureProject($event)
-    {
-        $io = $event->getIO();
-
-        //получаем данные о хосте для тестовой площадки
-        $host = self::askValid(
-            'Введите хост для тестовой площадки',
-            [
-                ['preg' => true, 'message' => 'Хост не указан'],
-                [
-                    'preg' => '/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})|([0-9a-z\-\.]+\.[a-z]+)(\:\d+)?$/',
-                    'message' => 'Хост указан в неверном формате',
-                ],
-                ['preg' => '/^.+\:\d+$/', 'message' => 'Не указан порт'],
-            ],
-            $io
-        );
-
-        //получаем данные об имени пользователя для тестовой площадки
-        $username = self::askValid(
-            'Введите имя пользователя для тестовой площадки',
-            [
-                ['preg' => true, 'message' => 'Имя пользователя не указано'],
-            ],
-            $io
-        );
-
-        //получаем данные о пароле для пользователя для тестовой площадки
-        $password = self::askValid(
-            'Введите пароль для тестовой площадки',
-            [
-                ['preg' => true, 'message' => 'Пароль не указан'],
-            ],
-            $io
-        );
-
-        //получаем ссылку на репозиторий
-        $git = self::askValid(
-            'Введите ссылку на репозиторий',
-            [
-                ['preg' => true, 'message' => 'Ссылка на репозиторий не указана'],
-                ['preg' => '/^ssh\:\/\/.+$/', 'message' => 'Не указан ssh протокол'],
-                ['preg' => '/^ssh\:\/\/[^\/]+\:\d+\/.+$/', 'message' => 'Не указан порт'],
-                ['preg' => '/^ssh\:\/\/[^@\/]+@[^@\/]+\:\d+\/.+$/', 'message' => 'Не указан пользователь'],
-            ],
-            $io
-        );
-
-        //настраиваем конфиг рокетира
-        $configFile = self::getRootPath() . '/.rocketeer/config.php';
-        $config = file_get_contents($configFile);
-        //хост
-        $config = preg_replace(
-            '/(\'host\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}' . addslashes($host) . '${2}',
-            $config
-        );
-        //имя пользователя
-        $config = preg_replace(
-            '/(\'username\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}' . addslashes($username) . '${2}',
-            $config
-        );
-        //пароль
-        $config = preg_replace(
-            '/(\'password\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}' . addslashes($password) . '${2}',
-            $config
-        );
-        file_put_contents($configFile, $config);
-
-        //настраиваем путь к проекту на сервере
-        $remoteFile = self::getRootPath() . '/.rocketeer/remote.php';
-        $config = file_get_contents($remoteFile);
-        $config = preg_replace(
-            '/(\'root_directory\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}/var/www/' . addslashes($username) . '${2}',
-            $config
-        );
-        file_put_contents($remoteFile, $config);
-
-        //настраиваем ссылку на репозиторий
-        $scmFile = self::getRootPath() . '/.rocketeer/scm.php';
-        $config = file_get_contents($scmFile);
-        $config = preg_replace(
-            '/(\'repository\'\s*=>\s*\')[^\']*(\',)/',
-            '${1}' . addslashes($git) . '${2}',
-            $config
-        );
-        file_put_contents($scmFile, $config);
-    }
-
-    /**
-     * Запрашиваем параметр с проверками.
-     *
-     * @param string $message
-     * @param array  $checks
-     * @param mixed  $io
-     *
-     * @return string
-     */
-    protected static function askValid($message, array $checks, $io)
-    {
-        $return = null;
-        while (true) {
-            $error = null;
-            if ($return !== null) {
-                foreach ($checks as $check) {
-                    if (
-                        ($check['preg'] === true && empty($return))
-                        || ($check['preg'] !== true && !preg_match($check['preg'], $return))
-                    ) {
-                        $error = $check['message'];
-                        break;
-                    }
-                }
-                if ($error === null) {
-                    break;
-                }
-            }
-            if (!empty($error)) {
-                $returnNew = trim($io->ask(
-                    self::textToConsole("{$error} (введите заново или оставьте пустую строку, чтобы сохранить вариант '{$return}'):\r\n")
-                ));
-                if ($returnNew !== '') {
-                    $return = $returnNew;
-                } else {
-                    break;
-                }
-            } else {
-                $return = trim($io->ask(self::textToConsole("{$message}:\r\n")));
-            }
-        }
-
-        return $return;
     }
 
     /**
