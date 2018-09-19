@@ -1,6 +1,5 @@
 <?php
 
-
 class MainPageCest
 {
     public function _before(AcceptanceTester $I)
