@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
 
 
 # php extensions
-RUN docker-php-ext-install pdo mysqli intl zip mcrypt json soap curl mbstring xml
+RUN docker-php-ext-install pdo mysqli intl zip mcrypt json soap curl mbstring xml opcache
 
 
 # php extension for gd with free type
