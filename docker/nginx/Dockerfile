@@ -16,4 +16,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY bitrix.conf /etc/nginx/conf.d/default.conf
 
 
+# set php upstream port
+RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
+
+
 CMD ["nginx"]

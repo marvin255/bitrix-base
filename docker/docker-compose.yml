@@ -12,15 +12,15 @@ services:
     #         MYSQL_DATABASE: ${MYSQL_DATABASE}
     #         MYSQL_USER: ${MYSQL_USER}
     #         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    # php:
-    #     build:
-    #         context: php7-fpm
-    #         args:
-    #             TIMEZONE: ${TIMEZONE}
-    #             HOST_USER_ID: ${HOST_USER_ID}
-    #             HOST_GROUP_ID: ${HOST_GROUP_ID}
-    #     volumes:
-    #         - ${SYMFONY_APP_PATH}:/var/www/symfony:cached
+    php:
+        build:
+            context: php
+            args:
+                TIMEZONE: ${TIMEZONE}
+                HOST_USER_ID: ${HOST_USER_ID}
+                HOST_GROUP_ID: ${HOST_GROUP_ID}
+        volumes:
+            - ${APP_PATH}:/var/www:cached
     nginx:
         build:
             context: nginx
@@ -29,5 +29,5 @@ services:
                 HOST_GROUP_ID: ${HOST_GROUP_ID}
         ports:
             - 8080:80
-        # volumes_from:
-        #     - php
+        volumes_from:
+            - php
