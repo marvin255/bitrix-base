@@ -11,11 +11,23 @@ RUN apt-get update && apt-get install -y \
     libmcrypt-dev \
     libxml2-dev \
     libssl-dev \
+    libfreetype6-dev \
+    libwebp-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libxpm-dev \
     libcurl4-openssl-dev
 
 
 # php extensions
-RUN docker-php-ext-install pdo pdo_mysql intl gd zip mcrypt json soap curl mbstring xml
+RUN docker-php-ext-install pdo mysqli intl zip mcrypt json soap curl mbstring xml
+
+
+# php extension for gd with free type
+RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
+    --with-png-dir --with-zlib-dir --with-xpm-dir --with-freetype-dir \
+    --enable-gd-native-ttf
+RUN docker-php-ext-install gd
 
 
 # composer
@@ -27,6 +39,7 @@ ARG HOST_USER_ID
 ARG HOST_GROUP_ID
 RUN if [ ! -z "$HOST_USER_ID" ] ; then usermod -u $HOST_USER_ID www-data ; fi
 RUN if [ ! -z "$HOST_GROUP_ID" ] ; then groupmod -g $HOST_GROUP_ID www-data ; fi
+RUN if [ ! -z "$HOST_USER_ID" ] ; then mkdir /var/session && chown $HOST_USER_ID:$HOST_GROUP_ID /var/session ; fi
 
 
 # bitrix pool config
