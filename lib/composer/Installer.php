@@ -43,7 +43,6 @@ class Installer
      */
     public static function configureProject($event)
     {
-        //запрашиваем имя проекта
         $projectName = $event->getIO()->askAndValidate(
             self::textToConsole("Укажите название проекта латиницей:\r\n"),
             function ($value) {
@@ -56,6 +55,7 @@ class Installer
                 return $value;
             }
         );
+
         self::createMainModule($projectName, self::getRootPath());
     }
 
