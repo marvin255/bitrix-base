@@ -46,8 +46,8 @@ vendor
 
 # docker
 /docker/.env
-/docker/logs/*
-!/docker/logs/.gitkeep
+/docker/data
+/docker/logs
 
 
 # apache & nginx conf

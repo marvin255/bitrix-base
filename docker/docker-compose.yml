@@ -1,17 +1,18 @@
 version: '2'
 
 services:
-    # db:
-    #     image: mysql
-    #     ports:
-    #         - 3303:3306
-    #     volumes:
-    #         - "./.data/db:/var/lib/mysql:cached"
-    #     environment:
-    #         MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    #         MYSQL_DATABASE: ${MYSQL_DATABASE}
-    #         MYSQL_USER: ${MYSQL_USER}
-    #         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    mysql:
+        build:
+            context: mysql
+        ports:
+            - 3333:3306
+        volumes:
+            - "./data/mysql:/var/lib/mysql:cached"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     php:
         build:
             context: php
