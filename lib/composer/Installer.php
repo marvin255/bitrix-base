@@ -70,15 +70,8 @@ class Installer
         $options = new bxcodegen\service\options\Collection([
             'name' => "{$siteName}.main",
         ]);
-        $pathManager = new bxcodegen\service\path\PathManager($rootFolder, [
-            'modules' => '/web/local/modules',
-        ]);
-        $locator = new bxcodegen\ServiceLocator;
-        $locator->set('pathManager', $pathManager);
-        $locator->set('renderer', new bxcodegen\service\renderer\Twig);
-        $locator->set('copier', new bxcodegen\service\filesystem\Copier);
 
-        (new bxcodegen\generator\Module)->generate($options, $locator);
+        (bxcodegen\Factory::createDefault($rootFolder))->run('module', $options);
     }
 
     /**
