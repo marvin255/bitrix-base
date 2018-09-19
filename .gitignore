@@ -46,8 +46,6 @@ vendor
 
 # docker
 /docker/.env
-/docker/data
-/docker/logs
 
 
 # apache & nginx conf

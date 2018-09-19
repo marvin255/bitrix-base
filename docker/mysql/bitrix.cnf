@@ -1,0 +1,3 @@
+[mysqld]
+sql-mode=""
+default-time-zone="+03:00"
