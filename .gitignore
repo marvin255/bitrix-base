@@ -40,10 +40,6 @@ Thumbs.db
 vendor
 
 
-# rocketeer
-.rocketeer/logs
-
-
 # docker
 /docker/.env
 
