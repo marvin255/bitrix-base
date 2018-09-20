@@ -44,7 +44,7 @@ class Installer
     public static function configureProject($event)
     {
         $projectName = $event->getIO()->askAndValidate(
-            "Enter project name in latin:\r\n",
+            "Enter project name (only latin symbols and digits allowed):\r\n",
             function ($value) {
                 if (!preg_match('/^[a-z0-9]+$/i', $value)) {
                     throw new InvalidArgumentException(
