@@ -63,6 +63,9 @@ class Installer
             $options['repository'] = $event->getIO()->ask(
                 "Enter repository url for rocketeer:\r\n"
             );
+            $options['host'] = $event->getIO()->ask(
+                "Enter host for rocketeer:\r\n"
+            );
             $options['username'] = $event->getIO()->ask(
                 "Enter username for rocketeer:\r\n"
             );
@@ -105,6 +108,7 @@ class Installer
             $options = new bxcodegen\service\options\Collection([
                 'application_name' => $options['application_name'],
                 'repository' => $options['repository'],
+                'host' => $options['host'],
                 'username' => $options['username'],
                 'password' => $options['password'],
                 'root_directory' => $options['root_directory'],
@@ -112,7 +116,7 @@ class Installer
                 'phar_inject' => true,
             ]);
             $codegen = bxcodegen\Factory::createDefault(self::getRootPath());
-            $codegen->run('module', $options);
+            $codegen->run('rocketeer', $options);
             $io->write([
                 'Current rockteer config requires marvin255/bxrocketeer.',
                 'Please run following command before using:',
