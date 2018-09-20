@@ -2,8 +2,9 @@
 
 namespace app\composer;
 
-use InvalidArgumentException;
 use marvin255\bxcodegen;
+use Composer\IO\IOInterface;
+use InvalidArgumentException;
 
 /**
  * Установка базового приложения для битрикса.
@@ -19,11 +20,6 @@ class Installer
      */
     public static function postCreateProject($event)
     {
-        //загружаем свежую версию rocketeer
-        file_put_contents(
-            self::getRootPath() . '/rocketeer.phar',
-            fopen('http://rocketeer.autopergamene.eu/versions/rocketeer.phar', 'r')
-        );
         //загружаем свежую версию bitrixsetup.php
         file_put_contents(
             self::getRootPath() . '/web/bitrixsetup.php',
@@ -43,7 +39,10 @@ class Installer
      */
     public static function configureProject($event)
     {
-        $projectName = $event->getIO()->askAndValidate(
+        $options = [];
+
+        //название приложения для создания главного модуля
+        $options['application_name'] = $event->getIO()->askAndValidate(
             "Enter project name (only latin symbols and digits allowed):\r\n",
             function ($value) {
                 if (!preg_match('/^[a-z0-9]+$/i', $value)) {
@@ -56,22 +55,70 @@ class Installer
             }
         );
 
-        self::createMainModule($projectName, self::getRootPath());
+        //настройки rocketeer
+        $options['rocketeer'] = $event->getIO()->askConfirmation(
+            "Ignite rocketeer (yes or no):\r\n"
+        );
+        if ($options['rocketeer']) {
+            $options['repository'] = $event->getIO()->ask(
+                "Enter repository url for rocketeer:\r\n"
+            );
+            $options['username'] = $event->getIO()->ask(
+                "Enter username for rocketeer:\r\n"
+            );
+            $options['password'] = $event->getIO()->ask(
+                "Enter password for rocketeer:\r\n"
+            );
+            $options['root_directory'] = $event->getIO()->ask(
+                "Enter root directory for rocketeer:\r\n"
+            );
+        }
+
+        self::createMainModule($options, $event->getIO());
+        self::createRocketeerConfig($options, $event->getIO());
     }
 
     /**
-     * Создает главный модуль сайта по названию и пути.
+     * Создает главный модуль сайта.
      *
-     * @param string $siteName
-     * @param string $rootFolder
+     * @param array                   $options
+     * @param Composer\IO\IOInterface $io
      */
-    protected static function createMainModule($siteName, $rootFolder)
+    protected static function createMainModule(array $options, IOInterface $io)
     {
         $options = new bxcodegen\service\options\Collection([
-            'name' => "{$siteName}.main",
+            'name' => "{$options['application_name']}.main",
         ]);
 
-        (bxcodegen\Factory::createDefault($rootFolder))->run('module', $options);
+        (bxcodegen\Factory::createDefault(self::getRootPath()))->run('module', $options);
+    }
+
+    /**
+     * Создает конфиг для rocketeer.
+     *
+     * @param array                   $options
+     * @param Composer\IO\IOInterface $io
+     */
+    protected static function createRocketeerConfig(array $options, IOInterface $io)
+    {
+        if ($options['rocketeer']) {
+            $options = new bxcodegen\service\options\Collection([
+                'application_name' => $options['application_name'],
+                'repository' => $options['repository'],
+                'username' => $options['username'],
+                'password' => $options['password'],
+                'root_directory' => $options['root_directory'],
+                'gitignore_inject' => true,
+                'phar_inject' => true,
+            ]);
+            $codegen = bxcodegen\Factory::createDefault(self::getRootPath());
+            $codegen->run('module', $options);
+            $io->write([
+                'Current rockteer config requires marvin255/bxrocketeer.',
+                'Please run following command before using:',
+                'composer require marvin255/bxrocketeer:dev-master',
+            ]);
+        }
     }
 
     /**

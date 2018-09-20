@@ -16,7 +16,7 @@
         "ext-hash": "*",
         "symfony/console": "~3.4",
         "marvin255/bxmigrate": "~3.0",
-        "marvin255/bxcodegen": "~0.8"
+        "marvin255/bxcodegen": "~0.9"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "~2.2",
