@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+    mysql:
+        build:
+            context: mysql
+        user: "${HOST_USER_ID}:${HOST_GROUP_ID}"
+        ports:
+            - 3333:3306
+        volumes:
+            - "./data/mysql:/var/lib/mysql:cached"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    php:
+        build:
+            context: php
+            args:
+                HOST_USER_ID: ${HOST_USER_ID}
+                HOST_GROUP_ID: ${HOST_GROUP_ID}
+        volumes:
+            - ${APP_PATH}:/var/www:cached
+    nginx:
+        build:
+            context: nginx
+            args:
+                HOST_USER_ID: ${HOST_USER_ID}
+                HOST_GROUP_ID: ${HOST_GROUP_ID}
+        ports:
+            - 8080:80
+        volumes_from:
+            - php

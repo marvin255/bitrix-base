@@ -40,12 +40,8 @@ Thumbs.db
 vendor
 
 
-# rocketeer
-.rocketeer/logs
-
-
-# vagrant
-.vagrant
+# docker
+/docker/.env
 
 
 # apache & nginx conf

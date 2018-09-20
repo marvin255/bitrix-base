@@ -1,6 +1,5 @@
 <?php
 
-
 use Bitrix\Main\Loader;
 
 class mainModulesCest
