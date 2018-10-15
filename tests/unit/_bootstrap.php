@@ -5,7 +5,7 @@ $siteModulesFolder = "{$siteRootFolder}/web/local/modules";
 
 spl_autoload_register(function ($class) use ($siteModulesFolder) {
     $arClass = explode('\\', strtolower(trim($class, '\\ ')));
-    if (isset($arClass[0])) {
+    if (count($arClass) > 2) {
         $file = $siteModulesFolder;
         $file .= '/' . array_shift($arClass);
         $file .= '.' . array_shift($arClass);
