@@ -5,7 +5,7 @@
 
 Предполагается, что сайт по мере разработки будет проходить авто-тесты. Рекомендуется, как минимум, реализовывать минимальный набор Acceptance-тестов для каждой страницы сайта.
 
-Конфигурация для запуска Codeception - `codeception.yml`, пример Unit-теста – `tests/unit/mainModulesCest.php`, пример Acceptance-теста – `acceptance/MainPageCest.php`.
+Конфигурация для запуска Codeception - `codeception.yml`, пример Acceptance-теста – `acceptance/MainPageCest.php`.
 
 Конфигурация приложения
 -----------------------
