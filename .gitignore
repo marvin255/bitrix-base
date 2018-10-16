@@ -39,6 +39,7 @@ Thumbs.db
 
 # composer
 vendor
+.composer
 
 
 # docker
