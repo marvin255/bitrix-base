@@ -34,7 +34,8 @@ site_checker_*.*
 nbproject
 Thumbs.db
 .~lock.*
- .vscode
+.vscode
+.bash_history
 
 
 # composer
