@@ -50,7 +50,7 @@ class HashRead extends Command
      */
     protected function getAdminPasswordh()
     {
-        $connection = Application::getConnection();
+        $connection = $this->getConnection();
         $res = $connection->query("SELECT * FROM `b_option` WHERE `NAME` = 'admin_passwordh'");
         $option = $res->fetch();
 
@@ -64,7 +64,7 @@ class HashRead extends Command
      */
     protected function getTemporaryCache()
     {
-        $file = dirname(dirname(dirname(__DIR__))) . '/web/bitrix/modules/main/admin/define.php';
+        $file = $this->getDefinePath();
         $return = null;
 
         if (file_exists($file)) {
@@ -75,5 +75,25 @@ class HashRead extends Command
         }
 
         return $return;
+    }
+
+    /**
+     * Возвращает объект для соединения с базой данных.
+     *
+     * @return \Bitrix\Main\DB\Connection
+     */
+    protected function getConnection()
+    {
+        return Application::getConnection();
+    }
+
+    /**
+     * Возвращает абсолютный путь к /bitrix/modules/main/admin/define.php.
+     *
+     * @return string
+     */
+    protected function getDefinePath()
+    {
+        return dirname(dirname(dirname(__DIR__))) . '/web/bitrix/modules/main/admin/define.php';
     }
 }

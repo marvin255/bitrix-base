@@ -57,5 +57,6 @@ $migrations = __DIR__ . '/migrations';
 //Команды проекта
 $application->add(new \app\base\console\CacheClear);
 $application->add(new \app\base\console\HashRead);
+$application->add(new \app\base\console\HashWrite);
 
 $application->run();
