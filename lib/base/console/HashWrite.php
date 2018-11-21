@@ -53,10 +53,9 @@ class HashWrite extends HashRead
     protected function setAdminPasswordh($admin_passwordh)
     {
         $connection = $this->getConnection();
-        $res = $connection->query(
-            "UPDATE `b_option` SET `VALUE` = :value WHERE `NAME` = 'admin_passwordh'",
-            [':value' => $admin_passwordh]
-        );
+        $arPrepare = $connection->getSqlHelper()->prepareUpdate('b_option', ['VALUE' => $admin_passwordh]);
+        $sql = "UPDATE `b_option` SET {$arPrepare[0]} WHERE `NAME` = 'admin_passwordh'";
+        $connection->query($sql);
     }
 
     /**
