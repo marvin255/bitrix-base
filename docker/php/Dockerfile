@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libfreetype6-dev \
     libmcrypt-dev \
-    libxml2-dev
+    libxml2-dev \
+    git
 
 
 # php extension for gd with free type
