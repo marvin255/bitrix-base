@@ -15,12 +15,12 @@
         "ext-zlib": "*",
         "ext-hash": "*",
         "symfony/console": "~3.4",
-        "marvin255/bxmigrate": "~3.0",
-        "marvin255/bxcodegen": "~0.9"
+        "marvin255/bxmigrate": "~3.0"
     },
     "require-dev": {
+        "marvin255/bxcodegen": "~0.9",
         "friendsofphp/php-cs-fixer": "~2.2",
-        "codeception/codeception": "^2.3"
+        "codeception/codeception": "~2.3"
     },
     "autoload": {
         "psr-4": { "app\\": "lib/" }

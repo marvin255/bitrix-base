@@ -15,8 +15,6 @@ class Installer
      * Событие после создания проекта. Копируем свежие версии rocketeer, composer и bitrixsetup.php.
      *
      * @param $event
-     *
-     * @throws \RuntimeException
      */
     public static function postCreateProject($event)
     {
@@ -40,6 +38,10 @@ class Installer
     public static function configureProject($event)
     {
         $options = [];
+
+        if (!class_exists(bxcodegen\Factory::class)) {
+            return;
+        }
 
         //название приложения для создания главного модуля
         $options['application_name'] = $event->getIO()->askAndValidate(
@@ -84,8 +86,8 @@ class Installer
     /**
      * Создает главный модуль сайта.
      *
-     * @param array                   $options
-     * @param Composer\IO\IOInterface $io
+     * @param array       $options
+     * @param IOInterface $io
      */
     protected static function createMainModule(array $options, IOInterface $io)
     {
@@ -99,8 +101,8 @@ class Installer
     /**
      * Создает конфиг для rocketeer.
      *
-     * @param array                   $options
-     * @param Composer\IO\IOInterface $io
+     * @param array       $options
+     * @param IOInterface $io
      */
     protected static function createRocketeerConfig(array $options, IOInterface $io)
     {
@@ -120,7 +122,7 @@ class Installer
             $io->write([
                 'Current rockteer config requires marvin255/bxrocketeer.',
                 'Please run following command before using:',
-                'composer require marvin255/bxrocketeer:dev-master',
+                'composer require marvin255/bxrocketeer:*',
             ]);
         }
     }

@@ -48,11 +48,15 @@ if (!class_exists('\Symfony\Component\Console\Application')) {
 $application = new \Symfony\Component\Console\Application('Console runner for Bitrix');
 
 //Команды миграций
-$migrations = __DIR__ . '/migrations';
-\marvin255\bxmigrate\cli\Factory::registerCommands($application, $migrations);
+if (class_exists(\marvin255\bxmigrate\cli\Factory::class)) {
+    $migrations = __DIR__ . '/migrations';
+    \marvin255\bxmigrate\cli\Factory::registerCommands($application, $migrations);
+}
 
 //Команды кодогенератора
-\marvin255\bxcodegen\Factory::registerCommands($application, __DIR__ . '/.bxcodegen.yaml');
+if (class_exists(\marvin255\bxcodegen\Factory::class)) {
+    \marvin255\bxcodegen\Factory::registerCommands($application, __DIR__ . '/.bxcodegen.yaml');
+}
 
 //Команды проекта
 $application->add(new \app\base\console\CacheClear);
