@@ -12,7 +12,7 @@ use InvalidArgumentException;
 class Installer
 {
     /**
-     * Событие после создания проекта. Копируем свежие версии rocketeer, composer и bitrixsetup.php.
+     * Событие после создания проекта. Копируем свежие версии composer и bitrixsetup.php.
      *
      * @param $event
      */
